@@ -98,12 +98,13 @@ def main_loop():
 					try:
 						if short_user['login']:
 							user = get_single_user(short_user['login'])
-							if user and user['email'] and user['name'] and user['public_repos'] >= 2:
+							if user and user['email'] and user['name'] and user['public_repos'] >= 2: # the user has at least two repos to seem less spammy =D
 								send_email_to_github(user['email'], user['name'])
 								print ("Success: email sent to: %s - name: %s - login: %s" %(user['email'], user['name'], user['login']))
 								last_id = user['id']
-					except:
+					except Exception as err:
 						print ("Error: sending email to: %s - name: %s - login: %s" %(user['email'], user['name'], user['login']))
+						print (err)
 				save_last_id(last_id)
 			else: # list is empty, we finished
 				save_last_id(last_id)
@@ -113,7 +114,7 @@ def main_loop():
 			save_last_id(last_id)
 			# error may be our quota/hour finnished or connection error
 			# halt for 30 minutes
-			print ("\nwait for 30 minuites")
+			print ("\nwait for 30 minutes")
 			time.sleep(30 * 60)
 
 	send_email_to_github.server.close()

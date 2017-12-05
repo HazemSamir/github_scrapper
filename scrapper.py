@@ -8,7 +8,7 @@ from email.mime.text import MIMEText
 
 smtp_SERVER = "smtp.gmail.com"
 ACCOUNT = "acc@gmail.com"
-PASSOWRD = "pass"
+PASSWORD = "pass"
 
 EMAIL_BODY = """
 <html>
@@ -87,7 +87,7 @@ def send_email_to_github(email, name=""):
 def main_loop():
 	# init
 	last_id = get_last_id()
-	send_email_to_github.server = smtp_server_init(smtp_SERVER, ACCOUNT, PASSOWRD)
+	send_email_to_github.server = smtp_server_init(smtp_SERVER, ACCOUNT, PASSWORD)
 	send_email_to_github.me = ACCOUNT
 
 	while 1:
